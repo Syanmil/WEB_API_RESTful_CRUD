@@ -2,12 +2,17 @@
   $(document).ready(function(){
     read()
   })
+  $('#newForm').on('submit', function(e){
+    e.preventDefault()
+    create()
+  })
   function read(){
     $.ajax({
       method: 'GET',
       url: 'http://localhost:3000/api/memos',
       dataType: 'json',
       success: function(data){
+        $('#memos').empty()
         data.forEach(function(memo){
           $('#memos').append(
             `<tr>
@@ -33,10 +38,29 @@
       destroy(this.id)
     })
   }
-  function destroy() {
-
+  function destroy(id) {
+    $.ajax({
+      method: 'DELETE',
+      url: `http://localhost:3000/api/memos/${id}`,
+    }).done(function(){
+      read()
+    })
   }
-  function update() {
-
+  function update(id) {
+    $.ajax({
+      method: 'PUT',
+      url: `http://localhost:3000/api/memos/${id}`,
+      data: 'json',
+    })
+  }
+  function create(){
+    let content = $('input.form-control').val()
+    $.ajax({
+      method: 'POST',
+      url: `http://localhost:3000/api/memos`,
+      data: {content: content}
+    }).done(function(){
+      read()
+    })
   }
 </script>
