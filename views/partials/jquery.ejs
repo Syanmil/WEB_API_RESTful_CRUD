@@ -6,6 +6,10 @@
     e.preventDefault()
     create()
   })
+  $('#updateform').on('submit', function(e){
+    e.preventDefault()
+    update()
+  })
   function read(){
     $.ajax({
       method: 'GET',
@@ -20,6 +24,7 @@
               <td>${memo.content}</td>
               <td>
                 <button type="button" id=${memo.id} class="btn btn-info update" name="update">Update</button>
+                <button type="button" id=${memo.id} class="btn btn-primary" data-toggle="modal" data-target=".update-modal">Update</button>
                 <button type="button" id=${memo.id} class="btn btn-danger delete" name="delete">Delete</button>
               </td>
             </tr>`
@@ -47,11 +52,11 @@
     })
   }
   function update(id) {
-    $.ajax({
-      method: 'PUT',
-      url: `http://localhost:3000/api/memos/${id}`,
-      data: 'json',
-    })
+    // $.ajax({
+    //   method: 'PUT',
+    //   url: `http://localhost:3000/api/memos/${id}`,
+    //   data: 'json',
+    // })
   }
   function create(){
     let content = $('input.form-control').val()
