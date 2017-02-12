@@ -1,0 +1,34 @@
+{
+  "name": "web-api-restful-crud",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "morgan": "~1.7.0",
+    "pg": "^6.1.2",
+    "sequelize": "^3.30.2",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "simple memo apps",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Syanmil/WEB_API_RESTful_CRUD.git"
+  },
+  "author": "Syanmil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Syanmil/WEB_API_RESTful_CRUD/issues"
+  },
+  "homepage": "https://github.com/Syanmil/WEB_API_RESTful_CRUD#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
