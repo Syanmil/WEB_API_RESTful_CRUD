@@ -1,8 +1,42 @@
 <script type="text/javascript">
   $(document).ready(function(){
-    alert('masuk');
+    read()
   })
   function read(){
-    
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/api/memos',
+      dataType: 'json',
+      success: function(data){
+        data.forEach(function(memo){
+          $('#memos').append(
+            `<tr>
+              <td>${memo.id}</td>
+              <td>${memo.content}</td>
+              <td>
+                <button type="button" id=${memo.id} class="btn btn-info update" name="update">Update</button>
+                <button type="button" id=${memo.id} class="btn btn-danger delete" name="delete">Delete</button>
+              </td>
+            </tr>`
+          )
+        })
+      }
+    }).done(function(){
+      addEventlistener()
+    })
+  }
+  function addEventlistener() {
+    $('.update').on('click', function(){
+      update(this.id)
+    })
+    $('.delete').on('click', function(){
+      destroy(this.id)
+    })
+  }
+  function destroy() {
+
+  }
+  function update() {
+
   }
 </script>

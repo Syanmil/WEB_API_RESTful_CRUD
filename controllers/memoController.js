@@ -10,7 +10,7 @@ let memoController = {
     })
   },
   read: function(req, res){
-    memos.findAll().then(function(memos) {
+    memos.findAll({order:[['id', 'ASC']]}).then(function(memos) {
       res.send(memos)
     })
   },
