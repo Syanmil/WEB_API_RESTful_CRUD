@@ -10,6 +10,28 @@
     e.preventDefault()
     update()
   })
+  function addEventlistener() {
+    $('.update').on('click', function(){
+      updateclick(this.id)
+    })
+    $('.delete').on('click', function(){
+      destroy(this.id)
+    })
+  }
+  function updateclick(id){
+    $('#updateform input#hiddenid').val(id)
+  }
+  function update(){
+    let id = $('#updateform input#hiddenid').val()
+    let isi = $('#updateinput').val()
+    $.ajax({
+      method: 'PUT',
+      url: `http://localhost:3000/api/memos/${id}`,
+      data: {content: isi}
+    }).done(function(){
+      read()
+    })
+  }
   function read(){
     $.ajax({
       method: 'GET',
@@ -23,8 +45,7 @@
               <td>${memo.id}</td>
               <td>${memo.content}</td>
               <td>
-                <button type="button" id=${memo.id} class="btn btn-info update" name="update">Update</button>
-                <button type="button" id=${memo.id} class="btn btn-primary" data-toggle="modal" data-target=".update-modal">Update</button>
+                <button type="button" id=${memo.id} class="btn btn-primary update" data-toggle="modal" data-target=".update-modal">Update</button>
                 <button type="button" id=${memo.id} class="btn btn-danger delete" name="delete">Delete</button>
               </td>
             </tr>`
@@ -35,14 +56,6 @@
       addEventlistener()
     })
   }
-  function addEventlistener() {
-    $('.update').on('click', function(){
-      update(this.id)
-    })
-    $('.delete').on('click', function(){
-      destroy(this.id)
-    })
-  }
   function destroy(id) {
     $.ajax({
       method: 'DELETE',
@@ -51,15 +64,8 @@
       read()
     })
   }
-  function update(id) {
-    // $.ajax({
-    //   method: 'PUT',
-    //   url: `http://localhost:3000/api/memos/${id}`,
-    //   data: 'json',
-    // })
-  }
   function create(){
-    let content = $('input.form-control').val()
+    let content = $('#newForm input.form-control').val()
     $.ajax({
       method: 'POST',
       url: `http://localhost:3000/api/memos`,
